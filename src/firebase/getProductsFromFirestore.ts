@@ -1,14 +1,14 @@
 import { getDocs, QuerySnapshot } from 'firebase/firestore';
-import { IProducts } from '../interfaces/IProducts';
+import { IProduct } from '../interfaces/IProduct';
 import productsCollection from './config';
 
-const getProductsFromFirestore = async (): Promise<IProducts[]> => {
-  const products: IProducts[] = [];
+const getProductsFromFirestore = async (): Promise<IProduct[]> => {
+  const products: IProduct[] = [];
 
   const querySnapshot: QuerySnapshot = await getDocs(productsCollection);
 
   querySnapshot.forEach((product) => {
-    products.push({ id: product.id, ...product.data() } as IProducts);
+    products.push({ id: product.id, ...product.data() } as IProduct);
   });
 
   return products;
