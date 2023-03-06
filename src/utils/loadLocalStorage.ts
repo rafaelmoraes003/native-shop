@@ -9,6 +9,6 @@ const loadLocalStorage = async (): Promise<IProduct[]> => {
   }
   const cart = JSON.parse(dataFromLocalStorage as string) as IProduct[];
   return cart;
-}
+};
 
 export default loadLocalStorage;
