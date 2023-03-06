@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import CartContext from '../Context/CartContext';
 import { IProduct } from '../interfaces/IProduct';
@@ -9,7 +9,21 @@ import styles from '../styles/productCard';
 export default function ProductCard({ id, title, price, imgUrl }: IProduct) {
   const [isInLocalStorage, setIsInLocalStorage] = useState<boolean>(false);
   const [dropDownValue, setDropDownValue] = useState<number>(1);
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems, setCartItems, update } = useContext(CartContext);
+
+  useEffect(() => {
+    if (!cartItems.length) {
+      setDropDownValue(1);
+      setIsInLocalStorage(false);
+    } else {
+      cartItems.forEach((item) => {
+        if (item.id === id) {
+          setDropDownValue(item.quantity as number);
+          setIsInLocalStorage(true);
+        }
+      });
+    }
+  }, [update]);
 
   const addToCart = async (): Promise<void> => {
     let cart: IProduct[];
@@ -17,7 +31,7 @@ export default function ProductCard({ id, title, price, imgUrl }: IProduct) {
     if (!isInLocalStorage) {
       cart = [
         ...cartItems as IProduct[],
-        { id, title, price, imgUrl, quantity: dropDownValue }
+        { id, title, price, imgUrl, quantity: dropDownValue },
       ];
       setIsInLocalStorage(true);
     } else {
@@ -27,7 +41,7 @@ export default function ProductCard({ id, title, price, imgUrl }: IProduct) {
     }
     setCartItems(cart);
     await addToLocalStorage(cart);
-  }
+  };
 
   return (
     <View style={styles.card}>
@@ -51,5 +65,5 @@ export default function ProductCard({ id, title, price, imgUrl }: IProduct) {
         </Text>
       </Pressable>
     </View>
-  )
+  );
 }
