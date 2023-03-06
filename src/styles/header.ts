@@ -43,6 +43,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     opacity: 0.6,
   },
+  image: {
+    width: 35,
+    height: 24,
+  }
 });
 
 export default styles;
