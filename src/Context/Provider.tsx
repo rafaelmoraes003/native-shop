@@ -15,7 +15,7 @@ function Provider({ children }: ProviderProps) {
       setCartItems(cart);
     };
     loadCartItems();
-  });
+  }, []);
 
   const value: DefaultContextValueProps = useMemo(() => ({
     cartItems,
