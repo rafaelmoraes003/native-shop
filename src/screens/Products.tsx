@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard';
 import getProductsFromFirestore from '../firebase/getProductsFromFirestore';
 import { IProduct } from '../interfaces/IProduct';
 import { NavigationProp } from '../interfaces/NavigationProp';
+import styles from '../styles/products';
 
 export default function Products({ navigation }: NavigationProp) {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -23,23 +24,21 @@ export default function Products({ navigation }: NavigationProp) {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header navigation={navigation} />
-      <View>
+      <View style={styles.list}>
         <FlatList
           data={products}
-          renderItem={({ item }) => {
-            const { id, title, price, imgUrl } = item;
-            return (
-              <ProductCard
-                key={id}
-                id={id}
-                title={title}
-                price={price}
-                imgUrl={imgUrl}
-              />
-            )
-          }}
+          renderItem={({ item }) => (
+            <ProductCard
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              price={item.price}
+              imgUrl={item.imgUrl}
+            />
+          )}
+          keyExtractor={(item) => item.id}
           horizontal
         />
       </View>
