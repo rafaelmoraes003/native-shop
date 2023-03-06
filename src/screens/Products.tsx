@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Header from '../components/Header';
+import ProductCard from '../components/ProductCard';
 import getProductsFromFirestore from '../firebase/getProductsFromFirestore';
 import { IProduct } from '../interfaces/IProduct';
 import { NavigationProp } from '../interfaces/NavigationProp';
@@ -24,7 +25,24 @@ export default function Products({ navigation }: NavigationProp) {
   return (
     <View>
       <Header navigation={navigation} />
-      <Text>{JSON.stringify(products)}</Text>
+      <View>
+        <FlatList
+          data={products}
+          renderItem={({ item }) => {
+            const { id, title, price, imgUrl } = item;
+            return (
+              <ProductCard
+                key={id}
+                id={id}
+                title={title}
+                price={price}
+                imgUrl={imgUrl}
+              />
+            )
+          }}
+          horizontal
+        />
+      </View>
     </View>
   );
 }
