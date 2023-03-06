@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
+import { createContext } from 'react';
 import { DefaultContextValueProps } from '../interfaces/DefaultContextValueProps';
 
 const defaultContextValue: DefaultContextValueProps = {
