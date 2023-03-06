@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   image: {
     width: 35,
     height: 24,
-  }
+  },
 });
 
 export default styles;
