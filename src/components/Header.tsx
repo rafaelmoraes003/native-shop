@@ -10,14 +10,14 @@ import logo from '../assets/logo.png';
 import styles from '../styles/header';
 import { NavigationProp } from '../interfaces/NavigationProp';
 
-function Header({ navigation }: NavigationProp) {
+export default function Header({ navigation }: NavigationProp) {
   const { cartItems } = useContext(CartContext);
 
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
         <Text style={styles.logoText}>NATIVESHOP</Text>
-        <Image source={logo} style={{ width: 35, height: 24 }} />
+        <Image source={logo} style={styles.image} />
       </View>
       <TouchableOpacity
         onPress={() => navigation.navigate('Cart')}
@@ -29,5 +29,3 @@ function Header({ navigation }: NavigationProp) {
     </View>
   );
 }
-
-export default Header;
