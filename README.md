@@ -22,7 +22,7 @@
 
 ###
 
-Clone the application using the `git clone` command. After that, enter the project folder using the `cd native-shop` command.
+Clone the application using the `git clone` command. After that, enter the project folder using the `cd native-shop` command and use the `npm install` command to install all the dependencies.
 
 ###
 
