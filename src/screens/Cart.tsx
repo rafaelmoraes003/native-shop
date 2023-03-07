@@ -5,6 +5,8 @@ import CartContext from '../Context/CartContext';
 import CartItem from '../components/CartItem';
 import { NavigationProp } from '../interfaces/NavigationProp';
 import addToLocalStorage from '../utils/addToLocalStorage';
+import styles from '../styles/cart';
+import TotalPrice from '../components/TotalPrice';
 
 export default function Cart({ navigation }: NavigationProp) {
   const { cartItems, setCartItems, setUpdate } = useContext(CartContext);
@@ -25,9 +27,9 @@ export default function Cart({ navigation }: NavigationProp) {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header navigation={navigation} />
-      <View>
+      <View style={styles.list}>
         <FlatList
           data={cartItems}
           renderItem={({ item }) => (
@@ -41,13 +43,15 @@ export default function Cart({ navigation }: NavigationProp) {
             />
           )}
         />
+        <TotalPrice />
       </View>
-      <View>
+      <View style={styles.buttonArea}>
         <Pressable
           disabled={!cartItems.length}
           onPress={finishShopping}
+          style={styles.button}
         >
-          <Text>Finalizar</Text>
+          <Text style={styles.buttonText}>Finalizar</Text>
         </Pressable>
       </View>
     </View>
