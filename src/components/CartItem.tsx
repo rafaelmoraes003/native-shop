@@ -4,10 +4,24 @@ import CartContext from '../Context/CartContext';
 import { IProduct } from '../interfaces/IProduct';
 import DropDown from './DropDown';
 import styles from '../styles/cartItem';
+import addToLocalStorage from '../utils/addToLocalStorage';
 
 export default function CartItem({ id, title, price, imgUrl, quantity }: IProduct) {
   const [dropDownValue, setDropDownValue] = useState<number>(quantity as number);
   const { cartItems, setCartItems, setUpdate } = useContext(CartContext);
+
+  const handleQuantities = async (value: number): Promise<void> => {
+    const updatedProducts: IProduct[] = cartItems.map((item) => {
+      if (item.id === id) {
+        item.quantity = value;
+      }
+      return item;
+    });
+    setDropDownValue(value);
+    setCartItems(updatedProducts);
+    setUpdate((prev) => prev + 1);
+    await addToLocalStorage(updatedProducts);
+  }
 
   return (
     <View style={styles.container}>
@@ -21,7 +35,7 @@ export default function CartItem({ id, title, price, imgUrl, quantity }: IProduc
       <View>
         <DropDown
           value={dropDownValue}
-          setValue={setDropDownValue}
+          setValue={handleQuantities}
           enabled
         />
         <Text style={{ ...styles.price, fontSize: 21, margin: 5 }}>
