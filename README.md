@@ -26,7 +26,7 @@ Clone the application using the `git clone` command. After that, enter the proje
 
 ###
 
-<h2 align="left">Running the application with Docker</h2>
+<h2 align="left">Running the application</h2>
 
 ###
 
