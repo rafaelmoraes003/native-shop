@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Alert, FlatList, View } from 'react-native';
+import { Alert, FlatList, Pressable, Text, View } from 'react-native';
 import Header from '../components/Header';
 import CartContext from '../Context/CartContext';
 import CartItem from '../components/CartItem';
@@ -8,6 +8,21 @@ import addToLocalStorage from '../utils/addToLocalStorage';
 
 export default function Cart({ navigation }: NavigationProp) {
   const { cartItems, setCartItems, setUpdate } = useContext(CartContext);
+
+  const finishShopping = (): void => {
+    Alert.alert(
+      'Compra finalizada!',
+      'Seus produtos chegarão em breve.',
+      [{
+        onPress: async () => {
+          await addToLocalStorage([]);
+          setCartItems([]);
+          setUpdate((prev) => prev + 1);
+          navigation.goBack();
+        },
+      }],
+    );
+  };
 
   return (
     <View>
@@ -26,6 +41,14 @@ export default function Cart({ navigation }: NavigationProp) {
             />
           )}
         />
+      </View>
+      <View>
+        <Pressable
+          disabled={!cartItems.length}
+          onPress={finishShopping}
+        >
+          <Text>Finalizar</Text>
+        </Pressable>
       </View>
     </View>
   );
