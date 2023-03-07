@@ -21,7 +21,7 @@ export default function ProductCard({ id, title, price, imgUrl }: IProduct) {
           setDropDownValue(item.quantity as number);
           setIsInLocalStorage(true);
         }
-      })
+      });
     }
   }, [update]);
 

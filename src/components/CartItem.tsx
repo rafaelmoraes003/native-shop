@@ -21,7 +21,7 @@ export default function CartItem({ id, title, price, imgUrl, quantity }: IProduc
     setCartItems(updatedProducts);
     setUpdate((prev) => prev + 1);
     await addToLocalStorage(updatedProducts);
-  }
+  };
 
   return (
     <View style={styles.container}>
