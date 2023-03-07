@@ -30,7 +30,7 @@ Clone the application using the `git clone` command. After that, enter the proje
 
 ###
 
-inside the project, use the `npm start` command and open the application using the `Expo Go` application with the provided address.
+inside the project, use the `npm start` command and open the application using the `Expo Go` app with the provided address.
 
 <h2 align="left">Seeding the database</h2>
 
