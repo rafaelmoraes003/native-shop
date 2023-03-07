@@ -15,15 +15,14 @@ export default function ProductCard({ id, title, price, imgUrl }: IProduct) {
     if (!cartItems.length) {
       setDropDownValue(1);
       setIsInLocalStorage(false);
+    } else {
+      cartItems.forEach((item) => {
+        if (item.id === id) {
+          setDropDownValue(item.quantity as number);
+          setIsInLocalStorage(true);
+        }
+      })
     }
-    const initCartItems = cartItems.map((item) => {
-      if (item.id === id) {
-        setDropDownValue(item.quantity as number);
-        setIsInLocalStorage(true);
-      }
-      return item;
-    });
-    setCartItems(initCartItems);
   }, [update]);
 
   const addToCart = async (): Promise<void> => {
